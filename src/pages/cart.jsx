@@ -5,8 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { CartActions } from "../utils/enums"
 import { useRouter } from "next/router"
-
-import { XCircleIcon } from "@heroicons/react/solid"
+import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon"
 
 function Cart() {
    const router = useRouter()
@@ -98,7 +97,7 @@ function Cart() {
                                     className="relative max-w-xs overflow-hidden rounded-full bg-red-200 bg-cover bg-no-repeat p-1 text-red-600"
                                     type="button"
                                  >
-                                    <XCircleIcon className="h-5 w-5 max-w-xs transition duration-300 ease-in-out hover:scale-150 active:scale-90"></XCircleIcon>
+                                    <XCircleIcon className="h-7 w-7 max-w-xs transition duration-300 ease-in-out hover:scale-150 active:scale-90"></XCircleIcon>
                                  </button>
                               </td>
                            </tr>

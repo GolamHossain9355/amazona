@@ -65,6 +65,18 @@ function reducer(state, action) {
          return { ...state, cart: updatedCart }
       }
 
+      case CartActions.CART_RESET: {
+         const updatedCart = { ...state.cart, cartItems: [] }
+         const storedCart = JSON.parse(sessionStorage.getItem("cart"))
+
+         if (storedCart) {
+            storedCart.cart = updatedCart
+            sessionStorage.setItem("cart", JSON.stringify({ ...storedCart }))
+         }
+
+         return { ...state, cart: updatedCart }
+      }
+
       default:
          return state
    }
