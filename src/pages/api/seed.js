@@ -2,7 +2,7 @@ import db from "./../../utils/db"
 import User from "../../models/user"
 import data from "../../utils/data.js"
 
-const handler = async (req, res) => {
+const handler = async (_req, res) => {
    await db.connect()
    await User.deleteMany()
    await User.insertMany(data.users)
