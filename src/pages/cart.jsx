@@ -6,8 +6,10 @@ import Image from "next/image"
 import { CartActions } from "../utils/enums"
 import { useRouter } from "next/router"
 import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon"
+import axios from "axios"
+import { toast } from 'react-toastify';
 
-function Cart() {
+function CartScreen() {
    const router = useRouter()
    const {
       state: {
@@ -20,11 +22,23 @@ function Cart() {
       dispatch({ type: CartActions.CART_REMOVE_ITEM, payload: item })
    }
 
-   const updateQuantityHandler = (item, quantity) => {
+   const updateQuantityHandler = async (item, quantity) => {
+      try {
+         const { data } = await axios.get(`/api/products/${item._id}`)
+
+         if (data.countInStock < quantity) {
+            toast.error("Sorry. Product is out of stock")
+            return
+         }
+      } catch (error) {
+         console.error(error)
+      }
+
       dispatch({
          type: CartActions.CART_ADD_ITEM,
          payload: { ...item, quantity },
       })
+      toast.success("Product quantity updated")
    }
 
    return (
@@ -68,7 +82,7 @@ function Cart() {
                               <td>
                                  <select
                                     value={item.quantity}
-                                    className="cursor-pointer"
+                                    className="cursor-pointer max-w-max"
                                     onChange={(e) =>
                                        updateQuantityHandler(
                                           item,
@@ -106,7 +120,7 @@ function Cart() {
                   </table>
                </div>
 
-               <div className="card p-5">
+               <div className="card max-h-fit p-5">
                   <ul>
                      <li>
                         <div className="pb-3 text-xl">
@@ -138,4 +152,4 @@ function Cart() {
    )
 }
 
-export default Cart
+export default CartScreen

@@ -37,6 +37,22 @@ async function disconnect() {
    console.info("Not disconnected")
 }
 
-const db = { connect, disconnect }
+function convertDocToObject(doc) {
+   if (Array.isArray(doc)) {
+      return doc.map((item) => {
+         item._id = item._id.toString()
+         item.createdAt = item.createdAt.toString()
+         item.updatedAt = item.updatedAt.toString()
+         return item
+      })
+   }
+
+   doc._id = doc._id.toString()
+   doc.createdAt = doc.createdAt.toString()
+   doc.updatedAt = doc.updatedAt.toString()
+   return doc
+}
+
+const db = { connect, disconnect, convertDocToObject }
 
 export default db

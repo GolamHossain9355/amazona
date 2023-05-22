@@ -7,7 +7,7 @@ import { getError } from "@/utils/error"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 
-function Login() {
+function LoginScreen() {
    const { data: session } = useSession()
    const {
       register,
@@ -95,10 +95,7 @@ function Login() {
             </div>
 
             <div className="mb-4 flex w-full flex-col items-center justify-center gap-4">
-               <button
-                  className="primary-button w-1/3 max-w-[10rem]"
-                  type="submit"
-               >
+               <button className="custom-button" type="submit">
                   Login
                </button>
                <div className="mb-4">
@@ -111,4 +108,4 @@ function Login() {
    )
 }
 
-export default Login
+export default LoginScreen

@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css"
 import DropdownLink from "./DropdownLink"
 import { CartActions } from "@/utils/enums"
 
-function Layout({ children, title }) {
+function Layout({ children, title, className }) {
    const { status, data: session } = useSession()
    const {
       state: { cart },
@@ -101,7 +101,7 @@ function Layout({ children, title }) {
                </nav>
             </header>
 
-            <main className="container m-auto mt-4 px-4">{children}</main>
+            <main className={`container m-auto mt-4 px-4 ${className}`}>{children}</main>
 
             <footer className="flex h-10 items-center justify-center shadow-inner">
                <p>Copyright © 2022 Amazona</p>

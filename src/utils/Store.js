@@ -60,7 +60,15 @@ function reducer(state, action) {
 
       case CartActions.CART_INITIAL_ITEMS: {
          const cartItems = action.payload.cart.cartItems
-         const updatedCart = { ...state.cart, cartItems }
+         const shippingAddress = action.payload.cart.shippingAddress
+         const paymentMethod = action.payload.cart.paymentMethod
+
+         const updatedCart = {
+            ...state.cart,
+            cartItems,
+            shippingAddress,
+            paymentMethod,
+         }
 
          return { ...state, cart: updatedCart }
       }
@@ -77,13 +85,58 @@ function reducer(state, action) {
          return { ...state, cart: updatedCart }
       }
 
+      case CartActions.SAVE_SHIPPING_ADDRESS: {
+         const updatedCart = {
+            ...state.cart,
+            shippingAddress: {
+               ...state.cart.shippingAddress,
+               ...action.payload,
+            },
+         }
+
+         const storedCart = JSON.parse(sessionStorage.getItem("cart"))
+         if (storedCart) {
+            storedCart.cart = updatedCart
+            sessionStorage.setItem("cart", JSON.stringify({ ...storedCart }))
+         } else {
+            throw new Error("No cart found in session storage")
+         }
+
+         return {
+            ...state,
+            cart: updatedCart,
+         }
+      }
+
+      case CartActions.SAVE_PAYMENT_METHOD: {
+         const updatedCart = {
+            ...state.cart,
+            paymentMethod: action.payload,
+         }
+
+         const storedCart = JSON.parse(sessionStorage.getItem("cart"))
+         if (storedCart) {
+            storedCart.cart = updatedCart
+            sessionStorage.setItem("cart", JSON.stringify({ ...storedCart }))
+         } else {
+            throw new Error("No cart found in session storage")
+         }
+
+         return {
+            ...state,
+            cart: updatedCart,
+         }
+      }
+
       default:
          return state
    }
 }
 
 export function StoreProvider({ children }) {
-   const [state, dispatch] = useReducer(reducer, { cart: { cartItems: [] } })
+   const [state, dispatch] = useReducer(reducer, {
+      cart: { cartItems: [], shippingAddress: {}, paymentMethod: "" },
+   })
 
    useEffect(() => {
       const storedCart = JSON.parse(sessionStorage.getItem("cart"))
@@ -100,6 +153,6 @@ export function StoreProvider({ children }) {
    return <Store.Provider value={value}>{children}</Store.Provider>
 }
 
-export function useSessionStorage() {
+export function useStoreContext() {
    return useContext(Store)
 }

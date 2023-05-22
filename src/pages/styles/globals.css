@@ -24,15 +24,30 @@ a {
 }
 
 .primary-button {
-   @apply rounded bg-amber-300 px-4 py-2 shadow outline-none hover:bg-amber-400 active:bg-amber-500;
+   @apply rounded bg-amber-300 px-4 py-2 shadow outline-none hover:bg-amber-400  active:bg-amber-500;
 }
+
+.custom-button {
+   @apply w-1/3 min-w-fit max-w-[10rem] rounded bg-amber-300 px-4 py-2 shadow outline-none hover:bg-amber-400 active:bg-amber-500;
+}
+
+.custom-button-gray {
+   @apply w-1/3 min-w-fit max-w-[10rem] rounded bg-gray-100 px-4 py-2 shadow outline-none hover:bg-gray-200 active:bg-gray-300;
+}
+
 .default-button {
    @apply rounded bg-gray-100 px-4 py-2 text-black shadow outline-none hover:bg-gray-200 active:bg-gray-300;
 }
 
-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
 select,
 textarea {
+   @apply mt-1 w-full rounded border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-400;
+}
+
+input[type="radio"] {
    @apply rounded border p-2 outline-none ring-indigo-300 focus:ring;
 }
 
