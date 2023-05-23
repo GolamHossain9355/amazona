@@ -1,15 +1,13 @@
-import Layout from "@/components/Layout"
 import ProductItem from "@/components/ProductItem"
 import db from './../utils/db';
-import Product from "@/models/product";
+import Product from "@/models/Product";
 import { useStoreContext } from '@/utils/Store';
-import { useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { CartActions } from '@/utils/enums';
+import { ACTIONS } from '@/utils/enums';
 
+Home.title = "Home Page"
 export default function Home({ products }) {
-   const router = useRouter()
    const {
       state: {
          cart: { cartItems },
@@ -34,7 +32,7 @@ export default function Home({ products }) {
 
 
       dispatch({
-         type: CartActions.CART_ADD_ITEM,
+         type: ACTIONS.CART_ADD_ITEM,
          payload: { ...product, quantity },
       })
 
@@ -42,7 +40,7 @@ export default function Home({ products }) {
    }
 
    return (
-      <Layout title="Home Page">
+      <>
          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {products?.map((product) => (
                <ProductItem
@@ -52,7 +50,7 @@ export default function Home({ products }) {
                />
             ))}
          </div>
-      </Layout>
+      </>
    )
 }
 

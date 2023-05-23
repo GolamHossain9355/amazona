@@ -1,7 +1,11 @@
-import Product from "@/models/product"
+import Product from "@/models/Product"
 import db from "@/utils/db"
+import { getSession } from "next-auth/react"
 
 const handler = async (req, res) => {
+   const session = await getSession({ req })
+   console.log(session)
+
    const productID = req.query._id
 
    await db.connect()

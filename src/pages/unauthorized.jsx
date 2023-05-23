@@ -1,16 +1,17 @@
 import React from "react"
-import Layout from "@/components/Layout"
 import { useRouter } from "next/router"
+import PageHeading from "@/components/PageHeading"
 
+UnauthorizedScreen.title = "Unauthorized Page"
 function UnauthorizedScreen() {
    const router = useRouter()
    const { message } = router.query
    return (
-      <Layout title="Unauthorized Page">
-         <h1 className="text-xl">Access Denied</h1>
+      <>
+         <PageHeading>Access Denied</PageHeading>
 
          {message && <div className="mb-4 text-red-500">{message}</div>}
-      </Layout>
+      </>
    )
 }
 

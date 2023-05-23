@@ -8,7 +8,7 @@ import { Menu } from "@headlessui/react"
 
 import "react-toastify/dist/ReactToastify.css"
 import DropdownLink from "./DropdownLink"
-import { CartActions } from "@/utils/enums"
+import { ACTIONS } from "@/utils/enums"
 
 function Layout({ children, title, className }) {
    const { status, data: session } = useSession()
@@ -18,7 +18,7 @@ function Layout({ children, title, className }) {
    } = useContext(Store)
 
    const logoutHandler = () => {
-      dispatch({ type: CartActions.CART_RESET })
+      dispatch({ type: ACTIONS.CART_RESET })
       signOut({ callbackUrl: "/login" })
    }
 

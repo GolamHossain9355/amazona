@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
-import Layout from "../components/Layout"
 import CheckoutWizard from "@/components/CheckoutWizard"
 import { useRouter } from "next/router"
 import { useStoreContext } from "@/utils/Store"
 import { toast } from "react-toastify"
-import { CartActions } from "@/utils/enums"
+import { ACTIONS } from "@/utils/enums"
+import PageHeading from './../components/PageHeading';
 
+PaymentScreen.title = "Payment Method"
+PaymentScreen.auth = true
 function PaymentScreen() {
    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("")
    const router = useRouter()
@@ -30,17 +32,17 @@ function PaymentScreen() {
          return
       }
 
-      dispatch({ type: CartActions.SAVE_PAYMENT_METHOD, payload: selectedPaymentMethod })
-      router.push("/placeOrder")
+      dispatch({ type: ACTIONS.SAVE_PAYMENT_METHOD, payload: selectedPaymentMethod })
+      router.push("/placeorder")
    }
 
    const paymentMethods = ["PayPal", "Stripe", "CashOnDelivery"]
 
    return (
-      <Layout title="Payment Method">
+      <>
          <CheckoutWizard activeStep={2} />
          <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
-            <h1 className="mb-4 text-2xl font-bold">Payment Method</h1>
+            <PageHeading className="font-bold">Payment Method</PageHeading>
 
             {paymentMethods.map((payment) => (
                <div key={payment} className="mb-4 flex justify-start items-center gap-2">
@@ -70,7 +72,7 @@ function PaymentScreen() {
                <button className="custom-button">Next</button>
             </div>
          </form>
-      </Layout>
+      </>
    );
 }
 

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react"
-import { CartActions } from "./enums"
+import { ACTIONS } from "./enums"
 
 export const Store = createContext()
 
@@ -7,7 +7,7 @@ function reducer(state, action) {
    const allCartItems = state.cart.cartItems
 
    switch (action.type) {
-      case CartActions.CART_ADD_ITEM: {
+      case ACTIONS.CART_ADD_ITEM: {
          const newItem = action.payload
          const existItem = allCartItems.find(
             (item) => item.slug === newItem.slug
@@ -37,7 +37,7 @@ function reducer(state, action) {
          return { ...state, cart: updatedCart }
       }
 
-      case CartActions.CART_REMOVE_ITEM: {
+      case ACTIONS.CART_REMOVE_ITEM: {
          const itemToRemove = action.payload
          const cartItems = allCartItems.filter(
             (item) => item.slug !== itemToRemove.slug
@@ -58,7 +58,7 @@ function reducer(state, action) {
          return { ...state, cart: updatedCart }
       }
 
-      case CartActions.CART_INITIAL_ITEMS: {
+      case ACTIONS.CART_INITIAL_ITEMS: {
          const cartItems = action.payload.cart.cartItems
          const shippingAddress = action.payload.cart.shippingAddress
          const paymentMethod = action.payload.cart.paymentMethod
@@ -73,8 +73,13 @@ function reducer(state, action) {
          return { ...state, cart: updatedCart }
       }
 
-      case CartActions.CART_RESET: {
-         const updatedCart = { ...state.cart, cartItems: [] }
+      case ACTIONS.CART_RESET: {
+         const updatedCart = {
+            ...state.cart,
+            cartItems: [],
+            shippingAddress: {},
+            paymentMethod: "",
+         }
          const storedCart = JSON.parse(sessionStorage.getItem("cart"))
 
          if (storedCart) {
@@ -85,7 +90,20 @@ function reducer(state, action) {
          return { ...state, cart: updatedCart }
       }
 
-      case CartActions.SAVE_SHIPPING_ADDRESS: {
+      case ACTIONS.CART_CLEAR_ITEMS: {
+         const updatedCart = { ...state.cart, cartItems: [] }
+
+         const storedCart = JSON.parse(sessionStorage.getItem("cart"))
+
+         if (storedCart) {
+            storedCart.cart = updatedCart
+            sessionStorage.setItem("cart", JSON.stringify({ ...storedCart }))
+         }
+
+         return { ...state, cart: updatedCart }
+      }
+
+      case ACTIONS.SAVE_SHIPPING_ADDRESS: {
          const updatedCart = {
             ...state.cart,
             shippingAddress: {
@@ -108,7 +126,7 @@ function reducer(state, action) {
          }
       }
 
-      case CartActions.SAVE_PAYMENT_METHOD: {
+      case ACTIONS.SAVE_PAYMENT_METHOD: {
          const updatedCart = {
             ...state.cart,
             paymentMethod: action.payload,
@@ -142,7 +160,7 @@ export function StoreProvider({ children }) {
       const storedCart = JSON.parse(sessionStorage.getItem("cart"))
       if (storedCart?.cart?.cartItems?.length > 0) {
          dispatch({
-            type: CartActions.CART_INITIAL_ITEMS,
+            type: ACTIONS.CART_INITIAL_ITEMS,
             payload: storedCart,
          })
       }

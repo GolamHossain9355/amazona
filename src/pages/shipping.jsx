@@ -1,11 +1,13 @@
 import { useEffect } from "react"
-import Layout from "@/components/Layout"
 import CheckoutWizard from "./../components/CheckoutWizard"
 import { useForm } from "react-hook-form"
-import { CartActions } from "@/utils/enums"
+import { ACTIONS } from "@/utils/enums"
 import { useStoreContext } from "../utils/Store"
 import { useRouter } from "next/router"
+import PageHeading from "@/components/PageHeading"
 
+ShippingScreen.title = "Shipping Address"
+ShippingScreen.auth = true
 function ShippingScreen() {
    const router = useRouter()
    const {
@@ -33,7 +35,7 @@ function ShippingScreen() {
 
    const submitHandler = ({ fullName, address, city, country, postalCode }) => {
       dispatch({
-         type: CartActions.SAVE_SHIPPING_ADDRESS,
+         type: ACTIONS.SAVE_SHIPPING_ADDRESS,
          payload: { fullName, address, city, country, postalCode },
       })
 
@@ -41,14 +43,14 @@ function ShippingScreen() {
    }
 
    return (
-      <Layout title="Shipping Address">
+      <>
          <CheckoutWizard activeStep={1} />
 
          <form
             className="mx-auto max-w-screen-md"
             onSubmit={handleSubmit(submitHandler)}
          >
-            <h1 className="mb-4 text-xl">Shipping Address</h1>
+            <PageHeading>Shipping Address</PageHeading>
 
             <div className="mb-4">
                <label htmlFor="fullName">Full Name</label>
@@ -143,10 +145,8 @@ function ShippingScreen() {
                <button className="custom-button">Next</button>
             </div>
          </form>
-      </Layout>
+      </>
    )
 }
-
-ShippingScreen.auth = true
 
 export default ShippingScreen

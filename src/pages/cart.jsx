@@ -1,14 +1,14 @@
 import { useContext } from "react"
 import { Store } from "../utils/Store"
-import Layout from "@/components/Layout"
 import Link from "next/link"
 import Image from "next/image"
-import { CartActions } from "../utils/enums"
+import { ACTIONS } from "../utils/enums"
 import { useRouter } from "next/router"
 import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon"
 import axios from "axios"
 import { toast } from 'react-toastify';
 
+CartScreen.title = "Shopping Cart"
 function CartScreen() {
    const router = useRouter()
    const {
@@ -19,7 +19,7 @@ function CartScreen() {
    } = useContext(Store)
 
    const removeItemHandler = (item) => {
-      dispatch({ type: CartActions.CART_REMOVE_ITEM, payload: item })
+      dispatch({ type: ACTIONS.CART_REMOVE_ITEM, payload: item })
    }
 
    const updateQuantityHandler = async (item, quantity) => {
@@ -35,14 +35,14 @@ function CartScreen() {
       }
 
       dispatch({
-         type: CartActions.CART_ADD_ITEM,
+         type: ACTIONS.CART_ADD_ITEM,
          payload: { ...item, quantity },
       })
       toast.success("Product quantity updated")
    }
 
    return (
-      <Layout title="Shopping Cart">
+      <>
          <h1 className="mb-4 text-xl">Shopping Cart</h1>
 
          {cartItems.length === 0 ? (
@@ -148,7 +148,7 @@ function CartScreen() {
                </div>
             </div>
          )}
-      </Layout>
+      </>
    )
 }
 

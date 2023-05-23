@@ -1,15 +1,16 @@
 import React from "react"
 import axios from "axios"
-import Layout from "@/components/Layout"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
 import { useStoreContext } from "./../../utils/Store"
-import { CartActions } from "../../utils/enums"
+import { ACTIONS } from "../../utils/enums"
 import db from "@/utils/db"
-import Product from "@/models/product"
+import Product from "@/models/Product"
 import { toast } from "react-toastify"
+import PageHeading from './../../components/PageHeading';
 
+ProductScreen.title = ({ product }) => product ? product.name : "Product Details";
 function ProductScreen({ product }) {
    const router = useRouter()
    const {
@@ -39,17 +40,17 @@ function ProductScreen({ product }) {
 
 
       dispatch({
-         type: CartActions.CART_ADD_ITEM,
+         type: ACTIONS.CART_ADD_ITEM,
          payload: { ...product, quantity },
       })
 
       router.push("/cart")
    }
 
-   if (!product) return <Layout className="text-2xl text-red-600 text-center" title="Product Not Found">Product Not Found</Layout>
+   if (!product) return <div className="text-2xl text-red-600 text-center">Product Not Found</div>
 
    return (
-      <Layout title={product.name}>
+      <>
          <div className="py-2">
             <Link href="/">Back to Products</Link>
          </div>
@@ -67,7 +68,7 @@ function ProductScreen({ product }) {
             <div>
                <ul>
                   <li>
-                     <h1 className="text-lg">{product.name}</h1>
+                     <PageHeading className="text-lg">{product.name}</PageHeading>
                   </li>
                   <li>Category: {product.category}</li>
                   <li>Brand: {product.brand}</li>
@@ -109,9 +110,10 @@ function ProductScreen({ product }) {
                </div>
             </div>
          </div>
-      </Layout>
+      </>
    )
 }
+
 
 export async function getServerSideProps(context) {
    const { params } = context
