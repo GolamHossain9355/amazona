@@ -33,7 +33,7 @@ function PaymentScreen() {
       }
 
       dispatch({ type: ACTIONS.SAVE_PAYMENT_METHOD, payload: selectedPaymentMethod })
-      router.push("/placeorder")
+      router.push("/place-order")
    }
 
    const paymentMethods = ["PayPal", "Stripe", "CashOnDelivery"]

@@ -7,7 +7,7 @@ function getRouteString(routeClicked) {
    if (routeClicked === "User Login") route = ""
    if (routeClicked === "Shipping Address") route = "shipping"
    if (routeClicked === "Payment Method") route = "payment"
-   if (routeClicked === "Place Order") route = "placeorder"
+   if (routeClicked === "Place Order") route = "place-order"
 
    return route
 }
