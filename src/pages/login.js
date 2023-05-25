@@ -5,7 +5,7 @@ import { signIn, useSession } from "next-auth/react"
 import { getError } from "@/utils/error"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
-import PageHeading from './../components/PageHeading';
+import PageHeading from '../components/PageHeading';
 
 LoginScreen.title = "Login Page"
 function LoginScreen() {

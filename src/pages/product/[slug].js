@@ -3,12 +3,12 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
-import { useStoreContext } from "./../../utils/Store"
+import { useStoreContext } from "../../utils/Store"
 import { ACTIONS } from "../../utils/enums"
 import db from "@/utils/db"
 import Product from "@/models/Product"
 import { toast } from "react-toastify"
-import PageHeading from './../../components/PageHeading';
+import PageHeading from '../../components/PageHeading';
 
 ProductScreen.title = ({ product }) => product ? product.name : "Product Details";
 function ProductScreen({ product }) {

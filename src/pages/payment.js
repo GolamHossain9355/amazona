@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { useStoreContext } from "@/utils/Store"
 import { toast } from "react-toastify"
 import { ACTIONS } from "@/utils/enums"
-import PageHeading from './../components/PageHeading';
+import PageHeading from '../components/PageHeading';
 
 PaymentScreen.title = "Payment Method"
 PaymentScreen.auth = true

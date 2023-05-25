@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import CheckoutWizard from "./../components/CheckoutWizard"
+import CheckoutWizard from "../components/CheckoutWizard"
 import { useForm } from "react-hook-form"
 import { ACTIONS } from "@/utils/enums"
 import { useStoreContext } from "../utils/Store"
