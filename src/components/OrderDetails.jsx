@@ -2,8 +2,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import PageHeading from './PageHeading'
+import { PayPalButtons } from '@paypal/react-paypal-js'
 
-function OrderDetails({ orderDetails, currentPage = "place order", placeOrderHandler, loading }) {
+const getFormattedDate = (dateString) => new Intl.DateTimeFormat('en-us', { dateStyle: 'full', timeStyle: 'long' }).format(new Date(dateString))
+
+function OrderDetails({
+    orderDetails,
+    currentPage = "place order",
+    placeOrderHandler,
+    loading, createOrder,
+    onError,
+    onApprove,
+    isPending,
+    loadingPay }) {
     const {
         shippingAddress,
         paymentMethod,
@@ -17,6 +28,7 @@ function OrderDetails({ orderDetails, currentPage = "place order", placeOrderHan
         isDelivered,
         deliveredAt,
     } = orderDetails
+
     return (
         <div className="grid md:grid-cols-4 md:gap-5">
             <div className="overflow-x-auto md:col-span-3">
@@ -48,7 +60,7 @@ function OrderDetails({ orderDetails, currentPage = "place order", placeOrderHan
                     <div>{paymentMethod}</div>
                     {currentPage === "order" ? (
                         isPaid ? (
-                            <div className="alert-success">Paid at {paidAt}</div>
+                            <div className="alert-success">Paid at {getFormattedDate(paidAt)}</div>
                         ) : (
                             <div className="alert-error">Not paid</div>
                         )
@@ -141,7 +153,25 @@ function OrderDetails({ orderDetails, currentPage = "place order", placeOrderHan
                                 </button>
                             </li>
 
-                        ) : null}
+                        ) : (
+                            !isPaid ? (
+                                <li>
+                                    {isPending ? (<div>Loading...</div>) : (
+                                        <div className='w-full'>
+                                            <PayPalButtons
+                                                createOrder={createOrder}
+                                                onApprove={onApprove}
+                                                onError={onError}
+                                            />
+                                        </div>
+                                    )}
+
+                                    {loadingPay ? (
+                                        <div>Loading...</div>
+                                    ) : null}
+                                </li>
+                            ) : null
+                        )}
                     </ul>
                 </div>
             </div>

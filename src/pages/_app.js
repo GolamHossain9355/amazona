@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 
 import "./styles/globals.css"
 import Layout from "@/components/Layout"
+import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 export default function App({
    Component,
@@ -17,15 +18,17 @@ export default function App({
    return (
       <SessionProvider session={session}>
          <StoreProvider>
-            <Layout title={title}>
-               {Component.auth ? (
-                  <Auth adminOnly={Component.auth.adminOnly}>
+            <PayPalScriptProvider deferLoading={true}>
+               <Layout title={title}>
+                  {Component.auth ? (
+                     <Auth adminOnly={Component.auth.adminOnly}>
+                        <Component {...pageProps} />
+                     </Auth>
+                  ) : (
                      <Component {...pageProps} />
-                  </Auth>
-               ) : (
-                  <Component {...pageProps} />
-               )}
-            </Layout>
+                  )}
+               </Layout>
+            </PayPalScriptProvider>
          </StoreProvider>
       </SessionProvider>
    )

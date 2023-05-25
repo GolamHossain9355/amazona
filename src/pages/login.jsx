@@ -47,7 +47,7 @@ function LoginScreen() {
             className="mx-auto max-w-screen-md"
             onSubmit={handleSubmit(loginSubmitHandler)}
          >
-            <PageHeading className="text-center text-3xl">Login</PageHeading>
+            <PageHeading className="text-center text-4xl">Login</PageHeading>
 
             <div className="mb-4">
                <label htmlFor="email">Email: </label>
@@ -101,7 +101,7 @@ function LoginScreen() {
                </button>
                <div className="mb-4">
                   Don&apos;t have an account? &nbsp;
-                  <Link href="/register">Register</Link>
+                  <Link href={`/register?redirect=${redirect || '/'}`}>Register</Link>
                </div>
             </div>
          </form>

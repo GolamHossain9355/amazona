@@ -30,7 +30,7 @@ function Layout({ children, title, className }) {
             <link rel="icon" href="/favicon.ico" />
          </Head>
 
-         <ToastContainer position="top-center" limit={1} />
+         <ToastContainer position="top-center" limit={3} autoClose={3000} closeOnClick />
 
          <div className="flex min-h-screen flex-col justify-between">
             <header>
