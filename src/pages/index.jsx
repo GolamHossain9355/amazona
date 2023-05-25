@@ -1,10 +1,10 @@
 import ProductItem from "@/components/ProductItem"
 import db from './../utils/db';
-import Product from "@/models/Product";
 import { useStoreContext } from '@/utils/Store';
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ACTIONS } from '@/utils/enums';
+import Product from "@/models/Product";
 
 Home.title = "Home Page"
 export default function Home({ products }) {
