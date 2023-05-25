@@ -1,13 +1,13 @@
 import ProductItem from "@/components/ProductItem"
-import db from './../utils/db';
-import { useStoreContext } from '@/utils/Store';
-import axios from "axios";
-import { toast } from "react-toastify";
-import { ACTIONS } from '@/utils/enums';
-import Product from "@/models/Product";
+import db from "../utils/db"
+import { useStoreContext } from "@/utils/Store"
+import axios from "axios"
+import { toast } from "react-toastify"
+import { ACTIONS } from "@/utils/enums"
+import Product from "@/models/Product"
 
-Home.title = "Home Page"
-export default function Home({ products }) {
+HomePage.title = "Home Page"
+function HomePage({ products }) {
    const {
       state: {
          cart: { cartItems },
@@ -29,7 +29,6 @@ export default function Home({ products }) {
       } catch (error) {
          console.error(error)
       }
-
 
       dispatch({
          type: ACTIONS.CART_ADD_ITEM,
@@ -61,7 +60,9 @@ export async function getServerSideProps() {
 
    return {
       props: {
-         products: db.convertDocToObject(products)
-      }
+         products: db.convertDocToObject(products),
+      },
    }
 }
+
+export default HomePage
