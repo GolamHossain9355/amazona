@@ -28,6 +28,7 @@ export default NextAuth({
                email: credentials.email,
             })
             await db.disconnect()
+            console.info("User found")
             if (
                user &&
                bcryptjs.compareSync(credentials.password, user.password)
@@ -40,8 +41,14 @@ export default NextAuth({
                   isAdmin: user.isAdmin,
                }
             }
+            console.info("User not found and throwing an error")
             throw new Error("Invalid email or password")
          },
       }),
    ],
+   logger: {
+      error: console.error,
+      success: console.log,
+      debug: console.log,
+   },
 })
