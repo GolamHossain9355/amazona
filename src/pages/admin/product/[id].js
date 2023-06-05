@@ -72,6 +72,7 @@ export default function AdminProductEditScreen() {
       countInStock,
       description,
    }) => {
+      // this is to change
       try {
          dispatch({ type: "UPDATE_REQUEST" })
          await axios.put(`/api/admin/products/${productId}`, {
