@@ -31,6 +31,22 @@ function reducer(state, action) {
       case "PAY_RESET":
          return { ...state, loadingPay: false, successPay: false, errorPay: "" }
 
+      case "DELIVER_REQUEST":
+         return { ...state, loadingDeliver: true }
+
+      case "DELIVER_SUCCESS":
+         return { ...state, loadingDeliver: false, successDeliver: true }
+
+      case "DELIVER_FAIL":
+         return { ...state, loadingDeliver: false }
+
+      case "DELIVER_RESET":
+         return {
+            ...state,
+            loadingDeliver: false,
+            successDeliver: false,
+         }
+
       default:
          return state
    }
@@ -41,14 +57,25 @@ OrderScreen.auth = true
 function OrderScreen() {
    const { query } = useRouter()
    const orderID = query._id
+
    const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
 
-   const [{ loading, error, order, successPay, loadingPay }, dispatch] =
-      useReducer(reducer, {
-         loading: true,
-         order: {},
-         error: "",
-      })
+   const [
+      {
+         loading,
+         error,
+         order,
+         successPay,
+         loadingPay,
+         loadingDeliver,
+         successDeliver,
+      },
+      dispatch,
+   ] = useReducer(reducer, {
+      loading: true,
+      order: {},
+      error: "",
+   })
 
    useEffect(() => {
       const fetchOrder = async () => {
@@ -57,16 +84,24 @@ function OrderScreen() {
             const { data } = await axios.get(`/api/orders/${orderID}`)
             dispatch({ type: "FETCH_SUCCESS", payload: data })
          } catch (error) {
+            dispatch({ type: "FETCH_FAIL", payload: getError(error) })
             console.error(error)
             toast.error("Error fetching order data")
-            dispatch({ type: "FETCH_FAIL", payload: getError(error) })
          }
       }
 
-      if (successPay || !order._id || (order._id && order._id !== orderID)) {
+      if (
+         !order._id ||
+         successPay ||
+         successDeliver ||
+         (order._id && order._id !== orderID)
+      ) {
          fetchOrder()
 
          if (successPay) dispatch({ type: "PAY_RESET" })
+         if (successDeliver) {
+            dispatch({ type: "DELIVER_RESET" })
+         }
       } else {
          const loadPaypalScript = async () => {
             const { data: clientID } = await axios.get("/api/keys/paypal")
@@ -86,7 +121,7 @@ function OrderScreen() {
          }
          loadPaypalScript()
       }
-   }, [order, orderID, paypalDispatch, successPay])
+   }, [order, orderID, paypalDispatch, successDeliver, successPay])
 
    const createOrder = (data, actions) => {
       return actions.order
@@ -119,6 +154,23 @@ function OrderScreen() {
       })
    }
 
+   async function deliverOrderHandler() {
+      try {
+         dispatch({ type: "DELIVER_REQUEST" })
+         const { data } = await axios.put(
+            `/api/admin/orders/${order._id}/deliver`,
+            {
+               csrfToken: await getCsrfToken(),
+            }
+         )
+         dispatch({ type: "DELIVER_SUCCESS", payload: data })
+         toast.success("Order is delivered")
+      } catch (err) {
+         dispatch({ type: "DELIVER_FAIL", payload: getError(err) })
+         toast.error(getError(err))
+      }
+   }
+
    const onError = (err) => {
       toast.error(getError(err))
    }
@@ -139,6 +191,8 @@ function OrderScreen() {
                onError={onError}
                isPending={isPending}
                loadingPay={loadingPay}
+               loadingDeliver={loadingDeliver}
+               deliverOrderHandler={deliverOrderHandler}
             />
          )}
       </>

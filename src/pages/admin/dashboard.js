@@ -13,6 +13,7 @@ import {
 } from "chart.js"
 import React, { useEffect, useReducer } from "react"
 import { getError } from "../../utils/error"
+import DashboardSideBar from "@/components/DashboardSideBar"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -74,26 +75,11 @@ function AdminDashboardScreen() {
          },
       ],
    }
+
    return (
       <div className="grid md:grid-cols-4 md:gap-5">
-         <div className="card">
-            <ul className="flex h-fit flex-col items-center justify-center">
-               <li className="w-full rounded-t-lg p-3 text-center transition-all hover:bg-gray-200">
-                  <Link className="font-bold" href="/admin/dashboard">
-                     Dashboard
-                  </Link>
-               </li>
-               <li className="w-full rounded-sm p-3 text-center transition-all hover:bg-gray-200">
-                  <Link href="">Orders</Link>
-               </li>
-               <li className="w-full rounded-sm  p-3 text-center transition-all hover:bg-gray-200">
-                  <Link href="">Products</Link>
-               </li>
-               <li className="w-full rounded-b-lg p-3 text-center transition-all hover:bg-gray-200">
-                  <Link href="">Users</Link>
-               </li>
-            </ul>
-         </div>
+         <DashboardSideBar />
+
          <div className="md:col-span-3">
             <h1 className="mb-4 text-center text-xl md:text-left">
                Admin Dashboard

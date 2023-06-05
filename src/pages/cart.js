@@ -3,7 +3,7 @@ import { Store } from "../utils/Store"
 import Link from "next/link"
 import Image from "next/image"
 import { ACTIONS } from "../utils/enums"
-import { useRouter } from "next/router"
+import { useRouter, } from "next/router"
 import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon"
 import axios from "axios"
 import { toast } from 'react-toastify';
