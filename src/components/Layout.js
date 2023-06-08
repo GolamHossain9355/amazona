@@ -62,7 +62,7 @@ function Layout({ children, title, className }) {
                         className="rounded-br-none rounded-tr-none text-sm focus:ring-0"
                         onChange={(e) => setQuery(e.target.value)}
                         type="text"
-                        placeholder="Search products"
+                        placeholder="Search by name (fit-shirt, gold pants etc..)"
                      />
                      <button
                         className="ml-[-20px] mt-1 h-[37px] rounded rounded-bl-none rounded-tl-none bg-amber-300 p-1 text-sm dark:text-black"
