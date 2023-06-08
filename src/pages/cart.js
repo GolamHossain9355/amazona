@@ -3,10 +3,10 @@ import { Store } from "../utils/Store"
 import Link from "next/link"
 import Image from "next/image"
 import { ACTIONS } from "../utils/enums"
-import { useRouter, } from "next/router"
-import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon"
+import { useRouter } from "next/router"
+import { XCircleIcon } from "@heroicons/react/outline"
 import axios from "axios"
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify"
 
 CartScreen.title = "Shopping Cart"
 function CartScreen() {
@@ -82,7 +82,7 @@ function CartScreen() {
                               <td>
                                  <select
                                     value={item.quantity}
-                                    className="cursor-pointer max-w-max"
+                                    className="max-w-max cursor-pointer"
                                     onChange={(e) =>
                                        updateQuantityHandler(
                                           item,
@@ -111,7 +111,7 @@ function CartScreen() {
                                     className="relative max-w-xs overflow-hidden rounded-full bg-red-200 bg-cover bg-no-repeat p-1 text-red-600"
                                     type="button"
                                  >
-                                    <XCircleIcon className="h-7 w-7 max-w-xs transition duration-300 ease-in-out hover:scale-150 active:scale-90"></XCircleIcon>
+                                    <XCircleIcon className="h-7 w-7 max-w-xs transition duration-300 ease-in-out hover:scale-150 active:scale-90" />
                                  </button>
                               </td>
                            </tr>
