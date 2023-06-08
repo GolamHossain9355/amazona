@@ -41,8 +41,8 @@ function OrderDetails({
    const { data: session } = useSession()
 
    return (
-      <div className="grid md:grid-cols-4 md:gap-5">
-         <div className="overflow-x-auto md:col-span-3">
+      <div className="grid lg:grid-cols-4 lg:gap-5">
+         <div className="overflow-x-auto lg:col-span-3">
             <div className="card  p-5">
                <PageHeading>Shipping Address</PageHeading>
                <div>
@@ -83,7 +83,7 @@ function OrderDetails({
                )}
             </div>
 
-            <div className="card overflow-x-auto p-5">
+            <div className="card  p-5">
                <PageHeading>Order Items</PageHeading>
                <table className="min-w-full">
                   <thead className="border-b">
@@ -166,7 +166,7 @@ function OrderDetails({
                         {isPending ? (
                            <div>Loading...</div>
                         ) : (
-                           <div className="w-full">
+                           <div className="relative w-full">
                               <PayPalButtons
                                  createOrder={createOrder}
                                  onApprove={onApprove}

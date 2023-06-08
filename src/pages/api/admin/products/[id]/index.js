@@ -13,6 +13,8 @@ const handler = async (req, res) => {
       return await getHandler(req, res, user)
    } else if (req.method === "PUT") {
       return await putHandler(req, res, user)
+   } else if (req.method === "DELETE") {
+      return deleteHandler(req, res, user)
    } else {
       return res.status(400).send({ message: "Method not allowed" })
    }
@@ -41,6 +43,19 @@ const putHandler = async (req, res) => {
       await product.save()
       await db.disconnect()
       res.status(201).send({ message: "Product updated successfully" })
+   } else {
+      await db.disconnect()
+      res.status(404).send({ message: "Product not found" })
+   }
+}
+
+const deleteHandler = async (req, res) => {
+   await db.connect()
+   const product = await Product.findById(req.query.id)
+   if (product) {
+      await product.remove()
+      await db.disconnect()
+      res.send({ message: "Product deleted successfully" })
    } else {
       await db.disconnect()
       res.status(404).send({ message: "Product not found" })

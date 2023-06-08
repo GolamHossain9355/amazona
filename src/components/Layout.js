@@ -1,16 +1,26 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import Head from "next/head"
 import Link from "next/link"
 import { Store } from "../utils/Store"
 import { ToastContainer } from "react-toastify"
 import { signOut, useSession } from "next-auth/react"
 import { Menu } from "@headlessui/react"
+import { useRouter } from "next/router"
+import { SearchIcon } from "@heroicons/react/outline"
 
 import "react-toastify/dist/ReactToastify.css"
 import DropdownLink from "./DropdownLink"
 import { ACTIONS } from "@/utils/enums"
 
 function Layout({ children, title, className }) {
+   const [query, setQuery] = useState("")
+   const router = useRouter()
+
+   const submitHandler = (e) => {
+      e.preventDefault()
+      router.push(`/search?query=${query}`)
+   }
+
    const { status, data: session } = useSession()
    const {
       state: { cart },
@@ -43,6 +53,25 @@ function Layout({ children, title, className }) {
                   <Link className="text-lg font-bold" href="/">
                      Amazona
                   </Link>
+
+                  <form
+                     onSubmit={submitHandler}
+                     className="mx-2 hidden w-full items-center justify-center md:flex md:max-w-md lg:max-w-xl"
+                  >
+                     <input
+                        className="rounded-br-none rounded-tr-none text-sm focus:ring-0"
+                        onChange={(e) => setQuery(e.target.value)}
+                        type="text"
+                        placeholder="Search products"
+                     />
+                     <button
+                        className="ml-[-20px] mt-1 h-[37px] rounded rounded-bl-none rounded-tl-none bg-amber-300 p-1 text-sm dark:text-black"
+                        type="submit"
+                        id="button-addon2"
+                     >
+                        <SearchIcon className="h-5 w-5"></SearchIcon>
+                     </button>
+                  </form>
 
                   <div>
                      <Link className="p-2" href="/cart">

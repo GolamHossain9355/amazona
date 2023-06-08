@@ -11,5 +11,11 @@
       "titleBar.activeBackground": "#044848",
       "titleBar.activeForeground": "#EDFEFE"
    },
-   "cSpell.words": ["Amazona", "chartjs", "headlessui", "Toastify"]
+   "cSpell.words": [
+      "Amazona",
+      "chartjs",
+      "cloudinary",
+      "headlessui",
+      "Toastify"
+   ]
 }
