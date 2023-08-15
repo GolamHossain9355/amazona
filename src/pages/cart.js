@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 import { XCircleIcon } from "@heroicons/react/outline"
 import axios from "axios"
 import { toast } from "react-toastify"
-
+//
 CartScreen.title = "Shopping Cart"
 function CartScreen() {
    const router = useRouter()
