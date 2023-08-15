@@ -28,9 +28,7 @@ An e-commerce platform that enables users to explore, purchase, and manage a div
 
 ## Demo
 
--  Demo: `https://your-amazona-demo-url.com`
-
-[Insert screenshots or GIFs showcasing the user interface and key features.]
+-  Demo: `https://amazona-amber.vercel.app`
 
 ## Getting Started
 
