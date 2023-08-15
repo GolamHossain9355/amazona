@@ -103,7 +103,9 @@ function CartScreen() {
                                  </select>
                               </td>
 
-                              <td className="p-5">${item.price}</td>
+                              <td className="p-5">
+                                 ${item.price * item.quantity}(${item.price})
+                              </td>
 
                               <td className="p-5">
                                  <button

@@ -112,11 +112,8 @@ function OrderDetails({
                                  {item.name}
                               </Link>
                            </td>
-                           {/* adding this change */}
                            <td className=" p-5 text-right">{item.quantity}</td>
-                           <td className="p-5 text-right">
-                              ${item.price * item.quantity}(${item.price})
-                           </td>
+                           <td className="p-5 text-right">${item.price}</td>
                            <td className="p-5 text-right">
                               ${item.quantity * item.price}
                            </td>
