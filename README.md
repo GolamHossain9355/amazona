@@ -30,6 +30,66 @@ An e-commerce platform that enables users to explore, purchase, and manage a div
 
 -  Demo: `https://amazona-amber.vercel.app`
 
+1. Login:
+
+-  ![Project Screenshot](./public/images/project/login.png)
+
+2. Home:
+
+-  ![Project Screenshot](./public/images/project/home.png)
+
+3. Product Details:
+
+-  ![Project Screenshot](./public/images/project/product-detail.png)
+
+4. Shopping Cart:
+
+-  ![Project Screenshot](./public/images/project/cart.png)
+
+5. Shipping Address:
+
+-  ![Project Screenshot](./public/images/project/shipping.png)
+
+6. Payment Method:
+
+-  ![Project Screenshot](./public/images/project/payment-method.png)
+
+7. Place Order:
+
+-  ![Project Screenshot](./public/images/project/place-order.png)
+
+8. Order Details:
+
+-  ![Project Screenshot](./public/images/project/order-detail.png)
+
+9. Order History
+
+-  ![Project Screenshot](./public/images/project/order-history.png.png)
+
+10. Update Profile:
+
+-  ![Project Screenshot](./public/images/project/update-profile.png)
+
+11. Admin Dashboard:
+
+-  ![Project Screenshot](./public/images/project/admin-dashboard.png)
+
+12. Admin Orders:
+
+-  ![Project Screenshot](./public/images/project/admin-orders.png)
+
+13. Admin Products:
+
+-  ![Project Screenshot](./public/images/project/admin-products.png)
+
+14. Admin Edit Products:
+
+-  ![Project Screenshot](./public/images/project/admin-edit-product.png)
+
+15. Users:
+
+-  ![Project Screenshot](./public/images/project/admin-users.png.png)
+
 ## Getting Started
 
 To run this project locally, follow these steps:
