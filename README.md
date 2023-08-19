@@ -88,7 +88,7 @@ An e-commerce platform that enables users to explore, purchase, and manage a div
 
 15. Users:
 
--  ![Project Screenshot](./public/images/project/admin-users.png.png)
+-  ![Project Screenshot](./public/images/project/admin-users.png)
 
 ## Getting Started
 
