@@ -37,7 +37,7 @@ function Layout({ children, title, className }) {
          <Head>
             <title>{title ? title + " - Amazona" : "Amazona"}</title>
             <meta name="description" content="E-Commerce Website" />
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/icon.ico" />
          </Head>
 
          <ToastContainer

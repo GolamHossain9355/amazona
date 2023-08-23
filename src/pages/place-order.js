@@ -8,7 +8,6 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { getError } from "../utils/error"
 import { ACTIONS } from "@/utils/enums"
-// import { getCsrfToken } from '@/utils/getCsrfToken';
 import OrderDetails from "@/components/OrderDetails"
 import { getCsrfToken } from "next-auth/react"
 
